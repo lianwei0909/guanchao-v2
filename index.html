@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>行情通 · 股票</title>
+<meta name="theme-color" content="#4f46e5" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <span style="width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:17px;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:var(--sh-sm)">📈</span>
+      <span id="brandText">行情通</span>
+    </div>
+
+    <div class="nav-group">行情</div>
+    <button class="nav-item" data-route="stock-treemap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="4" rx="1"/><rect x="14" y="11" width="7" height="7" rx="1"/><rect x="3" y="13" width="7" height="5" rx="1"/></svg>大盘云图</button>
+    <button class="nav-item" data-route="stock-watchlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>自选股</button>
+    <button class="nav-item" data-route="stock-rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 14l3-4 3 3 4-6"/></svg>A股行情</button>
+    <button class="nav-item" data-route="stock-dark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.8 1 6.4 2.6L12 12V3"/><path d="M21 5v7h-7"/></svg>暗盘监控</button>
+    <button class="nav-item" data-route="stock-overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>全景盘面</button>
+    <button class="nav-item" data-route="stock-youzi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>游资操作</button>
+    <button class="nav-item" data-route="stock-us"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>美股行情</button>
+    <button class="nav-item" data-route="stock-hk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>港股行情</button>
+    <button class="nav-item" data-route="stock-azt-compare"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 12l4-4 3 3 4-6"/></svg>对比分析</button>
+    <button class="nav-item" data-route="stock-forecast"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l3-8 5 16 3-8h5"/></svg>预测PP</button>
+    <button class="nav-item" data-route="stock-paper-portfolio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18v13H3z"/><path d="M3 7l3-4h12l3 4"/><circle cx="12" cy="12" r="1"/></svg>模拟持仓</button>
+    <button class="nav-item" data-route="stock-signal-monitor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>盘中监控</button>
+    <button class="nav-item" data-route="stock-news"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h13a2 2 0 0 1 2 2v13a2 2 0 0 0 2 2H4z"/><path d="M8 6h8M8 10h8M8 14h6"/></svg>股票资讯</button>
+
+    <div class="sidebar-foot">
+      <button class="sf-item sf-theme" id="sideThemeBtn" title="切换深色 / 浅色"><span class="sf-ico" id="sideThemeIcon">🌙</span><span class="sf-label" id="sideThemeLabel">切换深色</span></button>
+      <div class="sf-sep"></div>
+      <button class="sf-item sf-mail" id="sideMailBtn" title="邮件通知设置"><span class="sf-ico">✉️</span><span class="sf-label">邮件通知</span></button>
+      <button class="sf-item" id="sideHelpBtn" title="帮助"><span class="sf-ico">📖</span><span class="sf-label">帮助文档</span></button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <!-- 顶部指数滚动播放条 -->
+    <div class="idx-ticker" id="idxTicker">
+      <span class="it-logo">指数</span>
+      <div class="it-view"><div class="it-track" id="itTrack"><span class="it-loading">加载指数中…</span></div></div>
+    </div>
+
+    <header class="top">
+      <button class="hamburger" id="hamburger">☰</button>
+      <div class="top-actions">
+        <span class="top-clock" id="topClock"></span>
+        <span class="badge" id="mktStatus"><span class="live"></span><span id="mktStatusText">开盘中</span></span>
+      </div>
+    </header>
+
+    <div class="content">
+      <div id="errBanner" class="err-banner" style="display:none"><span id="errText">数据加载失败</span><button id="retryBtn">重试</button></div>
+      <div id="stockView"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 个股详情弹窗 -->
+<div class="modal-mask" id="detailModal" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><span id="dName">--</span> <span class="muted" id="dCode" style="font-size:13px;font-weight:400"></span></h3>
+      <button class="modal-close" data-close>×</button>
+    </div>
+    <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+      <span id="dPrice" style="font-size:30px;font-weight:800;font-family:var(--font-mono)">--</span>
+      <span id="dChg" style="font-size:15px;font-weight:600">--</span>
+      <span id="dPct" style="font-size:15px;font-weight:600">--</span>
+    </div>
+    <div class="chart-tabs" id="dSeg" style="margin-top:14px">
+      <button data-p="minute" class="on">分时</button>
+      <button data-p="day">日K</button>
+      <button data-p="week">周K</button>
+      <button data-p="month">月K</button>
+    </div>
+    <div class="chart-box"><canvas id="dChart"></canvas></div>
+    <div class="kv-grid" id="dKv"></div>
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn sm" id="dFav">加入股票池</button>
+      <button class="btn sm ghost" id="dSignal">高抛低吸信号</button>
+    </div>
+  </div>
+</div>
+
+<!-- 信号弹窗 -->
+<div class="modal-mask" id="signalModal" aria-hidden="true">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><span id="sName">--</span> 高抛低吸</h3>
+      <button class="modal-close" data-close>×</button>
+    </div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:10px">
+      <span>阈值 <b id="sTh" class="num" style="color:var(--text)">--</b></span>
+      <span>高点 <b id="sHigh" class="num" style="color:var(--up)">0</b></span>
+      <span>低点 <b id="sLow" class="num" style="color:var(--down)">0</b></span>
+    </div>
+    <div class="chart-box"><canvas id="sChart"></canvas></div>
+    <div class="sig-legend" style="margin-top:10px;font-size:13px;color:var(--muted)">
+      <span>🔴 高抛点</span><span>🟢 低吸点</span><span>灰线：均价</span>
+    </div>
+    <div id="sTimes" style="margin-top:10px;font-size:12.5px;color:var(--muted)"></div>
+  </div>
+</div>
+
+<!-- 邮件通知弹窗 -->
+<div class="modal-mask" id="mailModal" aria-hidden="true">
+  <div class="modal" style="width:min(580px,calc(100% - 24px))">
+    <div class="modal-head"><h3>✉️ 邮件通知</h3><button class="modal-close" data-close>×</button></div>
+    <p class="muted" style="font-size:12.5px;margin-bottom:14px;line-height:1.6">
+      配置发信邮箱后，服务端会按间隔巡检行情，命中规则即发信。规则与 SMTP 口令保存在服务器 <code>data/mail.json</code>，重启不丢失。
+    </p>
+
+    <div class="ml-sec">
+      <div class="ml-sec-t">收件与开关</div>
+      <div class="ml-row">
+        <label for="mlTo">接收邮箱</label>
+        <input id="mlTo" class="wl-input" placeholder="you@example.com" autocomplete="off" />
+      </div>
+      <div class="ml-row">
+        <label for="mlInterval">巡检间隔</label>
+        <select id="mlInterval" class="wl-input">
+          <option value="5">5 分钟</option>
+          <option value="15">15 分钟</option>
+          <option value="30">30 分钟</option>
+          <option value="60">60 分钟</option>
+        </select>
+      </div>
+      <label class="ml-sw"><input type="checkbox" id="mlEnabled" /><span>启用邮件通知</span></label>
+    </div>
+
+    <div class="ml-sec">
+      <div class="ml-sec-t">提醒规则</div>
+      <div class="ml-row">
+        <label for="mlWatchPct">自选异动</label>
+        <div class="ml-inline">
+          <input id="mlWatchPct" class="wl-input" type="number" step="0.1" min="0" placeholder="3" style="width:82px" />
+          <span class="ml-unit">% &nbsp;涨跌幅绝对值超过则提醒（0 关闭）</span>
+        </div>
+      </div>
+      <div class="ml-row">
+        <label for="mlIdxPct">指数异动</label>
+        <div class="ml-inline">
+          <input id="mlIdxPct" class="wl-input" type="number" step="0.1" min="0" placeholder="1" style="width:82px" />
+          <span class="ml-unit">% &nbsp;上证 / 深成 / 创业板 涨跌幅绝对值超过则提醒（0 关闭）</span>
+        </div>
+      </div>
+      <label class="ml-sw"><input type="checkbox" id="mlDaily" /><span>收盘日报（每交易日 15:30 发送自选股汇总）</span></label>
+
+      <div class="ml-alert-hd">
+        <span>价格提醒</span>
+        <button class="btn sm ghost" id="mlAddAlert">+ 添加</button>
+      </div>
+      <div id="mlAlerts" class="ml-alerts"><div class="ml-empty">暂无价格提醒</div></div>
+    </div>
+
+    <div class="ml-sec">
+      <div class="ml-sec-t">SMTP 发信服务</div>
+      <div class="ml-row">
+        <label for="mlPreset">服务商</label>
+        <select id="mlPreset" class="wl-input">
+          <option value="">自定义</option>
+          <option value="qq">QQ 邮箱</option>
+          <option value="163">网易 163</option>
+          <option value="gmail">Gmail</option>
+          <option value="outlook">Outlook / Hotmail</option>
+          <option value="exmail">腾讯企业邮</option>
+        </select>
+      </div>
+      <div class="ml-grid2">
+        <div class="ml-row"><label for="mlHost">服务器</label><input id="mlHost" class="wl-input" placeholder="smtp.qq.com" autocomplete="off" /></div>
+        <div class="ml-row"><label for="mlPort">端口</label><input id="mlPort" class="wl-input" type="number" placeholder="465" style="width:100%" /></div>
+      </div>
+      <div class="ml-grid2">
+        <div class="ml-row"><label for="mlUser">账号</label><input id="mlUser" class="wl-input" placeholder="发信邮箱地址" autocomplete="off" /></div>
+        <div class="ml-row"><label for="mlPass">授权码</label><input id="mlPass" class="wl-input" type="password" placeholder="SMTP 授权码 / 应用专用密码" autocomplete="new-password" /></div>
+      </div>
+      <div class="ml-row">
+        <label for="mlFrom">发件人</label>
+        <input id="mlFrom" class="wl-input" placeholder="行情通 &lt;you@example.com&gt;（留空则用账号）" autocomplete="off" />
+      </div>
+      <label class="ml-sw"><input type="checkbox" id="mlSecure" /><span>使用 SSL / TLS 直连（465 端口需勾选，587 端口不勾）</span></label>
+    </div>
+
+    <div id="mlMsg" class="ml-msg"></div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <button class="btn" id="mlSave">保存设置</button>
+      <button class="btn ghost" id="mlTest">发送测试邮件</button>
+      <button class="btn ghost" id="mlCheck" style="margin-left:auto">立即巡检一次</button>
+    </div>
+  </div>
+</div>
+
+<!-- 云同步弹窗 -->
+<div class="modal-mask" id="syncModal" aria-hidden="true">
+  <div class="modal" style="width:min(440px,calc(100% - 24px))">
+    <div class="modal-head"><h3>☁️ 云端同步</h3><button class="modal-close" data-close>×</button></div>
+    <p class="muted" style="font-size:13px;margin-bottom:14px">用「昵称 + 口令」生成同步码，换设备登录同一码即可同步自选股。无需注册。</p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <input id="syncUser" class="wl-input" placeholder="昵称" autocomplete="off" />
+      <input id="syncPass" class="wl-input" type="password" placeholder="口令" autocomplete="off" />
+      <div style="display:flex;gap:8px">
+        <button class="btn" id="syncPullBtn" style="flex:1">↓ 拉取</button>
+        <button class="btn ghost" id="syncPushBtn" style="flex:1">↑ 上传</button>
+      </div>
+      <div id="syncMsg" style="font-size:12.5px;color:var(--muted);min-height:18px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="./js/api.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

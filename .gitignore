@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Runtime
+data/
+*.log
+
+# Temp / verification scripts & screenshots
+_*.mjs
+_*.eml
+_shots*/
