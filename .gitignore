@@ -1,14 +1,31 @@
-# Dependencies
+# 依赖
 node_modules/
+**/node_modules/
 
-# Build output
-dist/
-
-# Runtime
-data/
+# 日志 / 运行产物
 *.log
+*.out.log
+server.err.log
+server.out.log
 
-# Temp / verification scripts & screenshots
-_*.mjs
-_*.eml
-_shots*/
+# 临时探测脚本
+_tmp_*
+_tmp_*.mjs
+
+# 压缩包 / 交付归档
+*.zip
+
+# 项目数据目录（非源码，CodeBuddy 内部数据）
+.codebuddy/
+
+# Python
+__pycache__/
+*.pyc
+**/__pycache__/
+
+# 量化交付物中的大体积数据样本（保留 .py 源码）
+_deliv/**/*.csv
+
+# 构建产物
+dist/
+build/
