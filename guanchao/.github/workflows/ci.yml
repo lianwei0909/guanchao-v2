@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # 1) 服务端静态门禁 —— no-undef 是 P0 类缺陷（闭包引用未声明变量）
+      #    唯一的自动发现手段。服务端是纯 JS，没有 TypeScript 兜底，这一关不能省。
+      - name: Lint (server)
+        run: npm run lint:server
+
+      - name: Lint (client)
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      # 产物门禁：历史上出现过两类问题，这里分别卡死
+      #   ① emptyOutDir=false 导致带哈希的历史 chunk 无限累积（曾达 3.52MB / 397 文件）
+      #   ② 单个巨型图片（曾有一张 1254×1254 / 2.75MB 的 logo，实际只以 24px 显示）
+      - name: 产物体积门禁
+        run: |
+          SIZE=$(du -sk dist-build | cut -f1)
+          echo "dist-build 总大小 = ${SIZE}KB"
+          if [ "$SIZE" -gt 2048 ]; then
+            echo "::error::产物总大小 ${SIZE}KB 超过 2MB：请检查 emptyOutDir 是否生效、是否引入了巨型依赖"
+            exit 1
+          fi
+          BIG=$(find dist-build -type f -size +1024k 2>/dev/null | head -5)
+          if [ -n "$BIG" ]; then
+            echo "::error::存在超过 1MB 的单个产物文件（请检查是否误入未压缩的图片/字体）："
+            echo "$BIG"
+            exit 1
+          fi
+          echo "产物门禁通过"

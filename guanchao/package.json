@@ -1,0 +1,43 @@
+{
+  "name": "guanchao",
+  "version": "1.0.0",
+  "description": "行情通 - 股市数据聚合网站（A股/港股/美股行情、快讯、对比分析、大盘云图等）",
+  "private": true,
+  "scripts": {
+    "start": "node server/index.js",
+    "start:supervised": "node server/watchdog.js",
+    "dev": "node server/index.js",
+    "vite": "vite",
+    "build": "vite build",
+    "preview": "npm run build && npm start",
+    "typecheck": "vue-tsc --noEmit",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:server": "eslint --config eslint.server.mjs server",
+    "verify": "npm run lint:server && npm run typecheck && npm test",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "pinia": "^2.1.7",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@vitejs/plugin-vue": "^5.0.4",
+    "eslint": "^9.13.0",
+    "eslint-plugin-vue": "^9.29.0",
+    "globals": "^15.11.0",
+    "prettier": "^3.3.3",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.2.8",
+    "vitest": "^2.1.4",
+    "vue-tsc": "^2.0.16"
+  }
+}

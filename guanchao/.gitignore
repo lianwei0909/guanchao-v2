@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Runtime
+data/
+logs/
+*.log
+
+# Temp / verification scripts & screenshots
+_*.mjs
+_*.eml
+_*.cjs
+_*.py
+_shots*/
+*.err
+
+# Python (ML 服务) 编译缓存与虚拟环境
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Build output (vite lib build)
+dist-build/

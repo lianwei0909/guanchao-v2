@@ -1,0 +1,11 @@
+node_modules
+dist
+.git
+.github
+.codebuddy
+data
+coverage
+*.log
+_*.cjs
+_*.mjs
+*.zip
